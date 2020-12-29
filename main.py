@@ -7,6 +7,7 @@ punctuation_symbols = 0
 
 words = 0
 sentences = 0
+links = 0
 
 with open('steam_description_data.csv', encoding='utf-8') as f:
     reader = csv.reader(f)
@@ -25,9 +26,11 @@ with open('steam_description_data.csv', encoding='utf-8') as f:
 
         words += len(re.findall(r"(\w+'\w+)|(\w+-\w+'\w+)|(\w+-\w+'\w)|\w+", string))
         sentences += len(re.findall(r"([A-Z][^\.!?]*[\.!?])", string))
+        links += len(re.findall(r'a href=(.*?)', string))
 
 print("Количество символов:", symbols)
 print("Количество символов без пробелов:", symbols - spaces)
 print("Количество символов без знаков препинания:", symbols - punctuation_symbols)
 print("Количество слов:", words)
 print("Количество предложений:", sentences)
+print("Количество ссылок:", links)
